@@ -1,10 +1,12 @@
-import logo from './logo.svg';
+import {Header, Main, Traders} from "./components"
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <div>Hello World</div>
+      <Header />
+      <Main />
     </div>
   );
 }

@@ -1,0 +1,13 @@
+.form-new {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-form {
+    border: 1px solid gray;
+    width: 500px;
+    padding: 25px;
+    margin: 32px;
+    border-radius: 10px;
+}
