@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/xchange-celo/static/css/main.079a1135.chunk.css",
+    "main.js": "/xchange-celo/static/js/main.3adf200d.chunk.js",
+    "main.js.map": "/xchange-celo/static/js/main.3adf200d.chunk.js.map",
+    "runtime-main.js": "/xchange-celo/static/js/runtime-main.d1d689c8.js",
+    "runtime-main.js.map": "/xchange-celo/static/js/runtime-main.d1d689c8.js.map",
+    "static/css/2.cbedb215.chunk.css": "/xchange-celo/static/css/2.cbedb215.chunk.css",
+    "static/js/2.0ffeed25.chunk.js": "/xchange-celo/static/js/2.0ffeed25.chunk.js",
+    "static/js/2.0ffeed25.chunk.js.map": "/xchange-celo/static/js/2.0ffeed25.chunk.js.map",
+    "static/js/3.17462406.chunk.js": "/xchange-celo/static/js/3.17462406.chunk.js",
+    "static/js/3.17462406.chunk.js.map": "/xchange-celo/static/js/3.17462406.chunk.js.map",
+    "index.html": "/xchange-celo/index.html",
+    "static/css/2.cbedb215.chunk.css.map": "/xchange-celo/static/css/2.cbedb215.chunk.css.map",
+    "static/css/main.079a1135.chunk.css.map": "/xchange-celo/static/css/main.079a1135.chunk.css.map",
+    "static/js/2.0ffeed25.chunk.js.LICENSE.txt": "/xchange-celo/static/js/2.0ffeed25.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.d1d689c8.js",
+    "static/css/2.cbedb215.chunk.css",
+    "static/js/2.0ffeed25.chunk.js",
+    "static/css/main.079a1135.chunk.css",
+    "static/js/main.3adf200d.chunk.js"
+  ]
+}
