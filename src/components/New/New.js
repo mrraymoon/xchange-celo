@@ -3,7 +3,7 @@ import { Form, Button } from "react-bootstrap"
 import { useNavigate } from "react-router-dom"
 import "./New.css"
 
-const New = () => {
+const New = ({ createItem }) => {
     const [itemName, setItemName] = useState()
     const [itemDescription, setItemDescription] = useState()
     const [itemImage, setItemImage] = useState()
@@ -13,6 +13,7 @@ const New = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        createItem(itemName, itemImage, itemDescription, itemPrice);
     }
 
     return (
@@ -34,7 +35,7 @@ const New = () => {
                     <Form.Group className="mb-3" controlId="exampleForm.ControlInput4">
                         <Form.Label>Price</Form.Label>
                         <Form.Control type="number" onChange={(e) => setItemPrice(e.target.value)} />
-                    </Form.Group>                
+                    </Form.Group>
                     <Button variant="dark" type="button" onClick={() => navigate("/")}>
                         Close
                     </Button>

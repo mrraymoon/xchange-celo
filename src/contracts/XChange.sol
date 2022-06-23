@@ -18,7 +18,7 @@ interface IERC20Token {
 
 contract XChange {
     using Counters for Counters.Counter;
-    Counters.Counter itemCounter;
+    Counters.Counter public itemCounter;
     address internal cUsdTokenAddress = 0x874069Fa1Eb16D44d622F2e0Ca25eeA172369bC1;
 
     struct Item {
@@ -40,6 +40,7 @@ contract XChange {
 
     mapping(uint => Item) private items;
     mapping(address => Trader) private traders;
+    mapping(address => bool) public isTrader;
     address[] public marketTraders;
 
     // create a new market in the exchange pool
@@ -58,7 +59,11 @@ contract XChange {
             false
         );
         itemCounter.increment();
-        marketTraders.push(msg.sender);
+        if (!isTrader[msg.sender]) {
+            marketTraders.push(msg.sender);
+            traders[msg.sender].trader = payable(msg.sender);
+            isTrader[msg.sender] = true;
+        }
     }
 
     // get new item from the exchange pool
@@ -93,7 +98,7 @@ contract XChange {
         Item storage item = items[_index];
         traders[item.owner].sold++;
         item.sold = true;
-        item.owner = payable(msg.sender);
+        item.owner = payable(msg.sender);   
     }
 
     // rate a trader
@@ -116,6 +121,11 @@ contract XChange {
         sold = traders[_trader].sold;
         rating = traders[_trader].rating;
         rateCount = traders[_trader].rateCount;
+    }
+
+    // get market traders 
+    function getMarketTraders() public view returns (address[] memory) {
+        return marketTraders;
     }
 
 }

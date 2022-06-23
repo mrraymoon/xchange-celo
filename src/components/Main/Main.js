@@ -1,29 +1,36 @@
-import React from 'react'
+import React from "react";
+import BigNumber from "bignumber.js";
+import Jazzicon, { jsNumberForAddress } from "react-jazzicon";
 import "./Main.css";
 
-const Main = () => {
-  const nft = {
-    index: 0,
-    name: "Alaf OP",
-    owner: "0x0000000",
-    image: "https://static.vecteezy.com/packs/media/components/global/search-explore-nav/img/vectors/term-bg-1-666de2d941529c25aa511dc18d727160.jpg",
-    description: "First market item. This is the first item of it's kind in the market",
-    price: 99
-  }
-  const { image, description, owner, name, index, price } = nft;
+const Main = ({ items, userAddress, buyItem }) => {
   return (
-    <div className='main'>
-      {[1, 2, 3, 4, 5, 6, 7].map(item => (<div className='item-card'>
-        <div className='card-price'>${price}</div>
-        <img className='card-img' src={image} alt={name} />
-        <div className='card-description'>{description}</div>
-        <div className='buy'>Buy</div>
-        <div></div>
-      </div>)
-      )}
+    <div className="main">
+      {items?.map((item) => (
+        <div className="item-card">
+          <div className="card-price">
+            ${BigNumber(item.price).shiftedBy(-18).toString()}
+          </div>
+          <img className="card-img" src={item.imageUrl} alt={item.name} />
+          <div className="item-details">
+            <Jazzicon diameter={40} seed={jsNumberForAddress(item.owner)} />
+            <div className="item-details-address">{item.owner}</div>
+          </div>
+          <div className="card-description">{item.description}</div>
+          {userAddress !== item.owner && (
+            <div
+              className="buy"
+              onClick={() => buyItem(item.index, item.price)}
+            >
+              Buy
+            </div>
+          )}
 
+          <div></div>
+        </div>
+      ))}
     </div>
-  )
-}
+  );
+};
 
-export default Main
+export default Main;
