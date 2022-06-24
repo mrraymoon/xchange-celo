@@ -43,6 +43,10 @@ contract XChange {
     mapping(address => bool) public isTrader;
     address[] public marketTraders;
 
+    event CreateItem(string name, address indexed owner);
+    event BuyItem(uint256 index, uint256 price);
+    event RateTrader(address indexed trader, uint256 rating);
+
     // create a new market in the exchange pool
     function createItem(
         string memory _name,
@@ -63,6 +67,8 @@ contract XChange {
             marketTraders.push(msg.sender);
             traders[msg.sender].trader = payable(msg.sender);
             isTrader[msg.sender] = true;
+
+            emit CreateItem(_name, msg.sender);
         }
     }
 
@@ -98,16 +104,22 @@ contract XChange {
         Item storage item = items[_index];
         traders[item.owner].sold++;
         item.sold = true;
-        item.owner = payable(msg.sender);   
+        item.owner = payable(msg.sender);  
+
+        emit BuyItem(_index, items[_index].price); 
     }
 
     // rate a trader
     function rateTrader(address _trader, uint256 _rating) public {
         Trader storage trader = traders[_trader];
+        require(trader.trader != address(0), "Trader does not exist");
         require(!trader.hasRate[msg.sender], "You have already rated this trader");
+        require((_rating > 0) && (_rating < 6), "Rating out of range"); 
         trader.rating += _rating;
         trader.rateCount++;        
         trader.hasRate[msg.sender] = true;
+
+        emit RateTrader(_trader, _rating);
     }
 
     // get trader 
@@ -116,8 +128,9 @@ contract XChange {
         uint256 sold,
         uint256 rating,
         uint256 rateCount
-    ) {
+    ) {        
         trader = traders[_trader].trader;
+        require(trader != address(0), "Trader does not exist");
         sold = traders[_trader].sold;
         rating = traders[_trader].rating;
         rateCount = traders[_trader].rateCount;

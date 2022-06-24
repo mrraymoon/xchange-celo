@@ -13,7 +13,17 @@ const New = ({ createItem }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createItem(itemName, itemImage, itemDescription, itemPrice);
+        if (itemName && itemImage && itemDescription && itemPrice) {
+            createItem(itemName, itemImage, itemDescription, itemPrice);
+            setItemName();
+            setItemDescription();
+            setItemImage();
+            setItemPrice();
+        } else {
+            alert("Please complete all fields before proceeding!");
+            return;
+        }
+        
     }
 
     return (

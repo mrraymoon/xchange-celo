@@ -15,6 +15,10 @@ const Traders = ({ traders, tradersArr, identicon, rateTrader }) => {
   };
 
   const handleRateChange = (value, trader) => {    
+    if ((value < 1) || (value > 5)) {
+      alert("Rating out of range");
+      return;
+    }
     setAllRates(prev => {
         return {...prev, [trader]: value}
     })
@@ -22,7 +26,10 @@ const Traders = ({ traders, tradersArr, identicon, rateTrader }) => {
 
   const handleRate = (trader) => {
     const rate = allRates[trader];
-    // console.log(`${trader} ===> ${rate}`)
+    if ((rate < 1) || (rate > 5)) {
+      alert("Rating out of range");
+      return;
+    }
     rateTrader(trader, rate)
   };
 
@@ -39,7 +46,7 @@ const Traders = ({ traders, tradersArr, identicon, rateTrader }) => {
             <div className="trader-icon">{identicon(trader.trader)}</div>
             <div className="trader-details">
               <div>Sold: {trader.sold}</div>
-              <div>Rating: {trader.rating / trader.rateCount || 0}</div>
+              <div>Rating: {Number(trader.rating / trader.rateCount || 0).toFixed(2)}</div>
             </div>
             <div className="trader-rate">
               <input
