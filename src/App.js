@@ -40,6 +40,7 @@ function App() {
     }
   }, [xchangeContract]);
 
+  // create an identicon from `_address`
   const identicon = (_address) => {
     return <Jazzicon diameter={50} seed={jsNumberForAddress(_address)} />;
   };
@@ -96,6 +97,7 @@ function App() {
     }
   };
 
+  // load items from market
   const loadItems = async () => {
     try {
       const itemsCount = await xchangeContract.methods.itemCounter().call();
@@ -123,6 +125,7 @@ function App() {
     }
   };
 
+  // create new item with give parameters
   const createItem = async (name, imageUrl, description, _price) => {
     try {
       const price = new BigNumber(_price).shiftedBy(ERC20_DECIMALS).toString();
@@ -134,6 +137,7 @@ function App() {
     }
   };
 
+  // buy item at index `itemIndex`
   const buyItem = async (itemIndex, itemPrice) => {
     console.log(userAddress);
     try {
@@ -151,6 +155,7 @@ function App() {
     }
   };
 
+  // return all traders
   const getTraders = async () => {
     try {
       const tradersArr = await xchangeContract.methods
@@ -176,6 +181,7 @@ function App() {
     }
   };
 
+  // rate trader with address `trader`g
   const rateTrader = async (trader, rate) => {
     try {
       await xchangeContract.methods
